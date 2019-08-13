@@ -1,0 +1,40 @@
+<form class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <input
+         #myRangeInput
+        class="form-control" 
+        placeholder="mm/dd/yyyy - mm/dd/yyyy"
+        name="dp" 
+        [(ngModel)]="model" 
+        ngbDatepicker 
+        [dayTemplate]="t"
+        [autoClose]="false"
+        [displayMonths]="2"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        #d="ngbDatepicker">
+
+        <ng-template #t let-date="date" let-focused="focused">
+            <span class="custom-day"
+                [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                [class.faded]="isHovered(date) || isInside(date)"
+                (click)="onDateSelection(date)"
+                (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null"
+                >
+            {{ date.day }}
+            </span>
+        </ng-template>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"> click
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<hr/>
+<pre>From: {{ fromDate | json }}</pre>
+<pre>To: {{ toDate | json }}</pre>
+
